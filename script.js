@@ -1,45 +1,83 @@
 const result = document.querySelector(".result");
 const calculation = document.querySelector(".calculation");
 
-let expression = "";
-
 const buttons = document.querySelectorAll("button");
 
+function switch_class() {
+    calculation.classList.remove("calculation");
+    calculation.classList.add("clicked-style-calc");
+    result.classList.remove("result");
+    result.classList.add("clicked-style-res");
+}
+
+function switch_class_back() {
+    calculation.classList.add("calculation");
+    calculation.classList.remove("clicked-style-calc");
+    result.classList.add("result");
+    result.classList.remove("clicked-style-res");
+}
+
+let expression = "";
+
 buttons.forEach((button) => {
-    let val = button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
         const value = button.value;
 
-        if (value === "="){
-            return ;
+        if (value === "=") {
+            switch_class();
+            return;
         }
 
-        if (value === "clr"){
+        if (value === "clr") {
             expression = "";
             calculation.innerHTML = "";
+            switch_class_back();
+            return;
         }
 
-        else{
+        if (value === "del") {
+            math = [...expression];
+            math.pop();
+            expression = math.join("");
+            calculation.innerHTML = expression;
+        }
+
+        else {
             expression += value;
             calculation.innerHTML = expression;
+            switch_class_back();
+            return;
         }
 
     });
 });
 
-let math = ``
+let n1 = "";
+let n2 = "";
 
-for (let btn of buttons){
-    let operator = btn.addEventListener("click",()=>{
-        const op = btn.value;
+buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        let btnval = btn.value;
 
-        if (!isNaN(op)){
-            math += op;
-            console.log(math);
+        switch (btnval) {
+            case (!isNaN(btnval)):
+                n1 += btnval;
+                break;
+
+            case (isNAN(btnval)):
+                break;
+
+            default:
+                break;
         }
-        
+        console.log(n1)
+
     })
-    
-}
+})
+
+
+
+
 
 
 
