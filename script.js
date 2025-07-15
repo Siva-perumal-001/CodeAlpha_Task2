@@ -59,8 +59,11 @@ function evaluation(button) {
       switch_class();
       localStorage.setItem("lastResult", result.textContent);
       return;
-    } catch {
+    }
+    catch {
       result.textContent = "Error";
+      switch_class();
+      return;
     }
   }
 
@@ -68,6 +71,7 @@ function evaluation(button) {
     expression = "";
     calculation.textContent = "";
     result.textContent = "";
+    inputstop = false;
     switch_class_back();
     localStorage.removeItem("lastExpression");
     localStorage.removeItem("lastResult");
@@ -107,4 +111,81 @@ buttons.forEach((button) => {
   button.addEventListener("click", () => {
     evaluation(button);
   });
+});
+
+document.addEventListener("keydown", (e) => {
+  const key = e.key;
+
+  if (!isNaN(key) || ['+', '-', '*', '/', '%', '.'].includes(key)) {
+
+    if (inputstop && !isNaN(key)) {
+      expression = key;
+      result.textContent = "";
+      switch_class_back();
+      inputstop = false;
+    }
+    else if (inputstop && isNaN(key)) {
+      expression = result.textContent + key;
+      result.textContent = "";
+      switch_class_back();
+      inputstop = false;
+    }
+    else {
+      expression += key;
+    }
+
+    calculation.innerHTML = expression;
+    localStorage.setItem("lastExpression", key);
+  }
+
+  if (key === "=" || key === "Enter") {
+    try {
+      inputstop = true;
+      const op = eval(expression);
+      result.textContent = Number(op.toFixed(8));
+      switch_class();
+      localStorage.setItem("lastResult", result.textContent);
+      return;
+    } catch {
+      result.textContent = "Error";
+    }
+  }
+
+  if (key === "Backspace") {
+    expression = expression.slice(0, -1);
+    calculation.textContent = expression;
+    localStorage.setItem("lastExpression", expression);
+    return;
+  }
+
+  if (key === "Escape") {
+    expression = "";
+    calculation.textContent = "";
+    result.textContent = "";
+    inputstop = false;
+    switch_class_back();
+    localStorage.removeItem("lastExpression");
+    localStorage.removeItem("lastResult");
+    return;
+  }
+
+  if (key === "Tab") {
+    e.preventDefault();
+    const isLight = body.classList.contains("light-theme");
+    body.classList.toggle("light-theme", !isLight);
+    body.classList.toggle("dark-theme", isLight);
+    icon.className = isLight ? "ri-sun-line" : "ri-moon-line";
+    toggleBtn.style.color = isLight ? "#fff" : "#111";
+    toggleBtn.style.background = isLight
+      ? "rgba(255, 255, 255, 0.15)"
+      : "rgba(255, 255, 255, 0.3)";
+  }
+
+})
+
+document.addEventListener("mousedown", function (e) {
+  if (e.target.tagName === "BUTTON") {
+    // prevent auto-focus on buttons
+    setTimeout(() => e.target.blur(), 0);
+  }
 });
