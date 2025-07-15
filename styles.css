@@ -10,80 +10,184 @@ html,
 body {
     width: 100%;
     height: 100%;
-    background-color:azure;
+    /*background: linear-gradient(to right top, #7efff5, #d8ffe3);*/
+    background: linear-gradient(145deg, #cef3da, #c4f0e8);
 }
+
+#theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    font-size: 24px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    color: #111;
+    z-index: 100;
+}
+
+/* Default: Light Theme */
+body.light-theme {
+    background: linear-gradient(145deg, #cef3da, #c4f0e8);
+    color: black;
+}
+
+body.dark-theme {
+    background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+body.dark-theme .main {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .display {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .calculation {
+    color: #66fcf1;
+}
+
+body.dark-theme .result {
+    color: #ffffff;
+}
+
+body.dark-theme .clicked-style-calc {
+    color: #99e6e0;
+}
+
+body.dark-theme .clicked-style-res {
+    color: #ffffff;
+}
+
+body.dark-theme button {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 6px 16px rgba(0, 255, 255, 0.25);
+}
+
+body.dark-theme button:active {
+    background: rgba(0, 255, 255, 0.2);
+}
+
 
 .main {
-   background-color: white;
-   width: 100%;
-   max-width: 400px;
-   display: flex;
-   flex-direction: column;
-   margin: auto;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%,-50%);
-   padding: 20px;
-   margin-top: 10px;
-   border-radius: 20px;
-   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    background: rgba(255, 255, 255, 0.2);
+    /* semi-transparent */
+    backdrop-filter: blur(15px);
+    /* glass blur */
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
 }
 
-.display{
+.display {
     background-color: #e7f5f5;
     border-radius: 12px;
     text-align: right;
     padding-right: 24px;
-    height: 120px;
-    margin-bottom: 20px;
+    height: 110px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.calculation{
+.calculation {
     font-size: 36px;
     font-weight: 800;
     padding: 10px 0 10px 0;
 }
 
-.result{
+.result {
     font-size: 22px;
     font-weight: 300;
-    padding: 0px 0px 10px 0;
+    margin-top: 8px;
 }
 
-.clicked-style-calc{
+.clicked-style-calc {
     font-size: 16px;
     font-weight: 300;
     padding: 10px 0 10px 0;
+    color: rgba(0, 0, 0, 0.76);
 }
 
-.clicked-style-res{
+.clicked-style-res {
     font-size: 36px;
     font-weight: 800;
 }
 
-.buttons-grid{
+.buttons-grid {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 6px;
 }
 
 button {
-    background-color: whitesmoke;
-    color: black;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #000;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 20px;
     font-size: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    transition: background 0.3s;
-  }
-  
-  button:hover {
-    background-color: #d4c5c5;
-  }
-  
-  button:active {
-    background-color: #d8cece;
-  }
-  
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 200, 255, 0.25);
+}
+
+button:active {
+    background: rgba(240, 248, 255, 0.7);
+    transform: scale(0.97);
+}
+
+.equal{
+    background-color: aqua;
+}
+
+.equal:hover{
+    background-color: aqua;
+}
+
+body.dark-theme .equal {
+    background: orange;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .equal:hover {
+    background:orange;
+    box-shadow: 0 6px 16px rgba(255, 145, 0, 0.678);
+}
