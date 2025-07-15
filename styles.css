@@ -174,11 +174,11 @@ button:active {
 }
 
 .equal{
-    background-color: aqua;
+    background-color: #7bec9f;
 }
 
 .equal:hover{
-    background-color: aqua;
+    background-color: #7bec9f;
 }
 
 body.dark-theme .equal {
